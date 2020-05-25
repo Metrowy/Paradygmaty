@@ -1,5 +1,6 @@
 package paradygmaty;
 
+import static java.lang.Math.PI;
 import static java.lang.Math.atan;
 
 public class Optymalizacja {
@@ -14,6 +15,39 @@ public class Optymalizacja {
         System.out.println("Optymalizacja lokalna (" + repeat + "powtórzeń)");
         minimizeOperations();
         limitedVariables();
+        constantValues();
+
+    }
+
+    public static void constantValues()
+    {
+        System.out.println("---------");
+        System.out.println("Wyliczanie wartości stałych");
+        System.out.println("");
+        double a = 80;
+        double b;
+        double c = 90.1;
+        long result;
+        long start = System.currentTimeMillis();
+        for(int i = 0; i < repeat; i++)
+        {
+            b=4*a*atan(1)/180+c;
+        }
+        long finish = System.currentTimeMillis();
+        result = finish - start;
+        totalTimeWithoutOpt += result;
+        System.out.println("Bez wyliczenia (b=4*a*atan(1)/180+c) czas: " +
+                result + " ms");
+        start = System.currentTimeMillis();
+        for(int i = 0; i < repeat; i++)
+        {
+            b=a*0.017453292519943295+c;
+        }
+        finish = System.currentTimeMillis();
+        result = finish - start;
+        totalTimeWithOpt += result;
+        System.out.println("Z wyliczeniem (b=a*0.017453292519943295+c) czas: " +
+                result + " ms");
 
     }
 
