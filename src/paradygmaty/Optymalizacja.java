@@ -12,10 +12,55 @@ public class Optymalizacja {
     public static void main(String[] args)
     {
         System.out.println("---------");
-        System.out.println("Optymalizacja lokalna (" + repeat + "powtórzeń)");
+        System.out.println("Optymalizacja lokalna (" + repeat + " powtórzeń)");
         minimizeOperations();
         limitedVariables();
         constantValues();
+        System.out.println("---------");
+        System.out.println("Optymalizacja globalna (" + repeat + " powtórzeń)");
+        developLoops();
+    }
+
+    public static void developLoops()
+    {
+        System.out.println("---------");
+        System.out.println("Rozwijanie pętli");
+        System.out.println("");
+        double[] tab = new double[10];
+        long result;
+        long start = System.currentTimeMillis();
+        for(int i = 0; i < repeat; i++)
+        {
+            for (int j=0; j<tab.length; j++)
+            {
+                tab[j] = 997;
+            }
+        }
+        long finish = System.currentTimeMillis();
+        result = finish-start;
+        totalTimeWithoutOpt += result;
+        System.out.println("Bez optymalizacji (for (int i=0; i<tab.length; i++) tab[i]=997;) czas: " +
+                result + " ms");
+        start = System.currentTimeMillis();
+        for(int i = 0; i < repeat; i++)
+        {
+            tab[0] = 997;
+            tab[1] = 997;
+            tab[2] = 997;
+            tab[3] = 997;
+            tab[4] = 997;
+            tab[5] = 997;
+            tab[6] = 997;
+            tab[7] = 997;
+            tab[8] = 997;
+            tab[9] = 997;
+        }
+        finish = System.currentTimeMillis();
+        result = finish-start;
+        totalTimeWithoutOpt += result;
+        System.out.println("Z optymalizacją (10 razy tab[i] = 997) czas: " +
+                result + " ms");
+
 
     }
 
