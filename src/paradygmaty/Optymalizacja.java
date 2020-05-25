@@ -13,12 +13,36 @@ public class Optymalizacja {
         System.out.println("---------");
         System.out.println("Optymalizacja lokalna (" + repeat + "powtórzeń)");
         minimizeOperations();
+        limitedVariables();
 
     }
 
     public static void limitedVariables()
     {
-
+        System.out.println("---------");
+        System.out.println("Stosowanie oszczędniejszych operacji");
+        System.out.println("");
+        double a = 80;
+        double r;
+        long result;
+        long start = System.currentTimeMillis();
+        for(int i = 0; i < repeat; i++)
+        {
+            r = 3*a;
+        }
+        long finish = System.currentTimeMillis();
+        result = finish - start;
+        totalTimeWithoutOpt += result;
+        System.out.println("Bez optymalizacji (r=3*a) czas: " + result + " ms");
+        start = System.currentTimeMillis();
+        for(int i = 0; i < repeat; i++)
+        {
+            r=a+a+a;
+        }
+        finish = System.currentTimeMillis();
+        result = finish - start;
+        totalTimeWithOpt += result;
+        System.out.println("Z optymalizacją (r=a+a+a) czas: " + result + " ms");
     }
 
     private static void minimizeOperations()
