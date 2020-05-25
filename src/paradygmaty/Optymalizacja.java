@@ -19,6 +19,61 @@ public class Optymalizacja {
         System.out.println("---------");
         System.out.println("Optymalizacja globalna (" + repeat + " powtórzeń)");
         developLoops();
+        joinLoops();
+    }
+
+    private static void joinLoops()
+    {
+        System.out.println("---------");
+        System.out.println("Łączenie pętli");
+        System.out.println("");
+        int a = 0;
+        int b = 0;
+        long result;
+        long start = System.currentTimeMillis();
+        for (int i=0; i<repeat; i++)
+        {
+            for (int j=0; j<200; j++)
+            {
+                a+=j;
+            }
+            for (int j=0; j<200; j++)
+            {
+                b+=j;
+            }
+        }
+        long finish = System.currentTimeMillis();
+        result = finish-start;
+        totalTimeWithoutOpt += result;
+        System.out.println("Bez optymalizacji");
+        System.out.println("");
+        System.out.println("for (int j=0; j<200; j++)");
+        System.out.println("\ta+=j;");
+        System.out.println("for (int j=0; j<200; j++)");
+        System.out.println("\tb+=j;");
+        System.out.println("");
+        System.out.println("czas: " + result + " ms");
+        start = System.currentTimeMillis();
+        for (int i = 0; i < repeat; i++)
+        {
+            for (int j = 0; j < 200; j++)
+            {
+                a+=j;
+                b+=j;
+            }
+        }
+        finish = System.currentTimeMillis();
+        result = finish-start;
+        totalTimeWithOpt += result;
+        System.out.println("");
+        System.out.println("Z optymalizacją");
+        System.out.println("");
+        System.out.println("for (int j=0; j<200; j++) {");
+        System.out.println("\ta+=j;");
+        System.out.println("\tb+=j;");
+        System.out.println("}");
+        System.out.println("");
+        System.out.println("czas: " + result + " ms");
     }
 
     public static void developLoops()
@@ -124,8 +179,7 @@ public class Optymalizacja {
         System.out.println("Z optymalizacją (r=a+a+a) czas: " + result + " ms");
     }
 
-    private static void minimizeOperations()
-    {
+    private static void minimizeOperations() {
         System.out.println("---------");
         System.out.println("Minimalizacja liczby operacji");
         System.out.println("");
@@ -137,25 +191,19 @@ public class Optymalizacja {
         double r;
         long result;
         long start = System.currentTimeMillis();
-        for(int i = 0; i < repeat; i++)
-        {
+        for (int i = 0; i < repeat; i++)
             r = a*b*c+a*b*d+a*e;
-        }
         long finish = System.currentTimeMillis();
-        result = finish - start;
+        result = finish-start;
         totalTimeWithoutOpt += result;
-        System.out.println("Bez optymalizacji (r = a*b*c+a*b*d+a*e) czas: " +
-                result + " ms");
+        System.out.println("Bez optymalizacji (r=a*b*c+a*b*d+a*e) czas: " + result + " ms");
         start = System.currentTimeMillis();
-        for(int i = 0; i < repeat; i++)
-        {
+        for (int i = 0; i < repeat; i++)
             r=a*(b*(c+d)+e);
-        }
         finish = System.currentTimeMillis();
-        result = finish - start;
+        result = finish-start;
         totalTimeWithOpt += result;
-        System.out.println("Z optymalizacją (r=a*(b*(c+d)+e)) czas: " +
-                result + " ms");
+        System.out.println("Z optymalizacją (r=a*(b*(c+d)+e)) czas: " + result + " ms");
     }
 
 
